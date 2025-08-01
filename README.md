@@ -25,6 +25,13 @@
 │   └── conversation_example.py   # 对话示例
 ├── notebook/
 │   └── test.ipynb               # Jupyter Notebook测试
+├── tests/
+│   ├── test_teaching_team.py    # 教学团队测试
+│   ├── test_file_handler_agent.py  # FileHandlerAgent专门测试
+│   ├── test_file_handler_simple.py # FileHandlerAgent简单测试
+│   ├── test_file_handler_direct.py # FileHandlerAgent直接工具调用测试
+│   ├── test_file_handler_integration.py # FileHandlerAgent集成测试
+│   └── run_tests.py             # 测试运行脚本
 └── README.md
 ```
 
@@ -72,6 +79,47 @@ python src/teaching_assistant.py
 ```bash
 python src/ollama_agent.py
 ```
+
+## 运行测试
+
+为了确保系统正常运行，项目包含了针对教学团队中各个Agent的单元测试:
+
+```bash
+python tests/run_tests.py
+```
+
+测试内容包括:
+- FileHandlerAgent（文件处理代理）的功能测试
+- CourseGeneratorAgent（课程生成代理）的初始化测试
+- CurriculumDirectorAgent（教研组负责人代理）的初始化测试
+- StudentAgent（学生代理）的初始化测试
+- 教学团队集成测试
+
+### FileHandlerAgent专门测试
+
+FileHandlerAgent负责文件读取和保存操作，有多项专门测试验证其功能：
+
+1. **简单测试** (`test_file_handler_simple.py`) - 基本功能验证
+   ```bash
+   python tests/test_file_handler_simple.py
+   ```
+
+2. **直接工具调用测试** (`test_file_handler_direct.py`) - 验证工具函数的直接调用
+   ```bash
+   python tests/test_file_handler_direct.py
+   ```
+
+3. **集成测试** (`test_file_handler_integration.py`) - 在团队环境中测试工具调用
+   ```bash
+   python tests/test_file_handler_integration.py
+   ```
+
+测试覆盖的功能：
+- 保存文件功能（包括自动扩展名添加）
+- 读取文件功能
+- 异常处理（如读取不存在的文件）
+- 长内容处理
+- 在团队环境中的工具调用
 
 ## 工作流程
 
